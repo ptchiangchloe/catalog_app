@@ -17,27 +17,22 @@ This project is only for local development, so you should have a local server se
 Install the Virtual Machine steps:
 [Link](https://classroom.udacity.com/nanodegrees/nd004/parts/8d3e23e1-9ab6-47eb-b4f3-d5dc7ef27bf0/modules/bc51d967-cb21-46f4-90ea-caf73439dc59/lessons/5475ecd6-cfdb-4418-85a2-f2583074c08d/concepts/14c72fe3-e3fe-4959-9c4b-467cf5b7c3a0)
 
-Install pip
-```sudo apt-get install python-pip```
+1. Install [vagrant virtual machine](https://github.com/udacity/fullstack-nanodegree-vm)
 
-Place your project folder in VirtualBox/vagrant folder
+2. Download this project folder and place it in the virtual machine folder.
 
-Run your local server
-```vagrant up```
+3. Run your local server in the vagrant folder
+    ```vagrant up```
 
-Log into your local server
+4. Log into your local server ```vagrant ssh```
 
-```vagrant ssh```
-
-Once you get into the local server
-
+5. Once you get into the local server
 ```cd /vagrant```
 
-Go to the project folder
+6. In the catalog project folder, ```sudo pip install wtforms```
+7. Run ```python app.py```
 
-Then install flask framework
 
-```pip install flask```
 
 
 ## Built With
