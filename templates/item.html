@@ -1,0 +1,6 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>{{item.title}}</h1>
+  <p>{{item.description | safe }}</p>
+{% endblock %}

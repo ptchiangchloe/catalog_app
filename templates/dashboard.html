@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>dashboard<small>welcome {{session.username}}</small></h1>
+  <a href="/add_item" class="btn btn-success">Add Item</a>
+  <hr>
+  <table class="table table-striped">
+    <tr>
+
+    </tr>
+    <tr>
+      <td>ID</td>
+      <td>TITLE</td>
+      <td>CATEGORY</td>
+      <td>CREATE DATE</td>
+      <td></td>
+    </tr>
+    {% for item in items %}
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.category}}</td>
+        <td>{{item.create_date}}</td>
+        <td><a href="edit_item/{{item.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td><a href="delete_item/{{item.id}}" class="btn btn-danger">Delete</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
