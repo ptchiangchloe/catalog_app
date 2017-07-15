@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>dashboard<small>welcome {{session.username}}</small></h1>
+  <h1>Categories</h1>
+  <ul class="list-group">
+    {% for category in categories%}
+    <li class="list-group-item">{{category}}</li>
+    {% endfor %}
+  </ul>
+  <h1>{{the_category}} items</h1>
+  <ul class="list-group">
+    {% for item in items%}
+    <li class="list-group-item">{{item.title}}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

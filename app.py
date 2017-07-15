@@ -1,13 +1,16 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
-from data import Articles
+from flask import Flask, render_template, flash, redirect, url_for, session, \
+logging, request, jsonify
+from data import Articles, Categories
 from wtforms import Form, StringField, TextAreaField, PasswordField, SelectField,validators
 from passlib.hash import sha256_crypt
-from appdb import add_user, get_user, add_item_to_db, get_items, get_item, update_item_to_db, delete_item_from_db
+from appdb import add_user, get_user, add_item_to_db, get_items, get_item, \
+update_item_to_db, delete_item_from_db, get_latest_items,get_items_by_category
 from functools import wraps
 
 app = Flask(__name__)
 
 Articles = Articles()
+categories = Categories()
 
 @app.route('/')
 @app.route('/home')
@@ -22,10 +25,18 @@ def about():
 def articles():
     return render_template('articles.html', articles = Articles)
 
-@app.route('/article/<string:id>/')
+@app.route('/catalog/<string:id>')
 def item(id):
     item = get_item(id)
     return render_template('item.html', item=item)
+
+@app.route('/catalog/<string:category>/items')
+def category(category):
+    items_by_category = get_items_by_category(category)
+    return render_template('category.html', items=items_by_category, \
+    categories=categories,the_category=category)
+
+
 
 # Register Form class
 class RegisterForm(Form):
@@ -46,6 +57,7 @@ def register():
         name = form.name.data
         email = form.email.data
         username = form.username.data
+        print username
         password = sha256_crypt.encrypt(str(form.password.data))
         add_user(name, email, username, password)
         flash('You are now registered and can log in', 'success')
@@ -108,23 +120,26 @@ def logout():
 @app.route('/dashboard')
 def dashboard():
     items = get_items()
+    latest_items = get_latest_items()
+    print latest_items
     print items
     if items > 0:
-        return render_template('dashboard.html', items=items)
+        return render_template('dashboard.html', items=items, categories=categories, \
+        latest_items=latest_items)
     else:
         msg = 'No Items Found'
-        return render_template('dashboard.html', msg=msg)
+        return render_template('dashboard.html', msg=msg, categories=categories)
 
 # Item Form class
 class ItemForm(Form):
     title = StringField('Title', [validators.length(min=1, max=100)])
     category = SelectField('Category', choices=[('soccer','Soccer'),('basketball','Basketball'),('baseball','Baseball'),
-    ('firsbee','Firsbee'),('snowboarding','Sonwboarding'),('rock climbing','Rock Climbing'),
+    ('firsbee','Firsbee'),('snowboarding','Sonwboarding'),('rock_climbing','Rock Climbing'),
     ('foosball','Foosball'),('skating','Skating'),('hockey','Hockey')])
     description = TextAreaField('Description', [validators.length(min=30)])
 
 # Add Item
-@app.route('/add_item', methods=['GET', 'POST'])
+@app.route('/catalog/add_item', methods=['GET', 'POST'])
 @is_logged_in
 def add_item():
     form = ItemForm(request.form)
@@ -141,7 +156,7 @@ def add_item():
     return render_template('add_item.html', form=form)
 
 # Edit item
-@app.route('/edit_item/<string:id>', methods=['GET', 'POST'])
+@app.route('/catalog/edit_item/<string:id>', methods=['GET', 'POST'])
 @is_logged_in
 def edit_item(id):
     item = get_item(id)
@@ -164,7 +179,7 @@ def edit_item(id):
     return render_template('edit_item.html', form=form)
 
 # Delete item
-@app.route('/delete_item/<string:id>', methods=['GET', 'POST'])
+@app.route('/catalog/delete_item/<string:id>', methods=['GET', 'POST'])
 @is_logged_in
 def delete_item(id):
     if request.method == 'POST':
@@ -173,6 +188,19 @@ def delete_item(id):
         return redirect(url_for('dashboard'))
     return render_template('delete_item.html')
 
+@app.route('/catalog')
+def catalog_json():
+     if request.method == 'GET':
+         raw_data = get_items()
+         Category = []
+         for data in raw_data:
+             dic = {}
+             dic['title'] = data['title']
+             dic['category'] = data['category']
+             dic['description'] = data['description'].replace('<p>', '').replace('</p>', '') 
+             Category.append(dic)
+         print Category
+         return jsonify(Category = Category)
 
 if __name__ == "__main__":
     app.secret_key = 'secret123'

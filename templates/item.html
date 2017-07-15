@@ -3,4 +3,9 @@
 {% block body %}
   <h1>{{item.title}}</h1>
   <p>{{item.description | safe }}</p>
+  <div class="">
+    <a href="edit_item/{{item.id}}" class="btn btn-default">Edit</a>
+    <a href="delete_item/{{item.id}}" class="btn btn-danger">Delete</a>
+  </div>
+
 {% endblock %}

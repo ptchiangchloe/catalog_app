@@ -15,7 +15,7 @@ def get_user(username, password_candidate):
     db = psycopg2.connect(database=DBNAME)
     print username
     c = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    c.execute("SELECT * FROM users WHERE username= (%s)",(username,))
+    c.execute("SELECT * FROM users WHERE username=(%s)",(username,))
     result = c.fetchone()
     print result
     db.commit()
@@ -38,10 +38,29 @@ def get_items():
   db.close()
   return result
 
+def get_latest_items():
+  db = psycopg2.connect(database=DBNAME)
+  c = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
+  c.execute("SELECT * FROM items ORDER BY create_date DESC LIMIT 10" )
+  result = c.fetchall()
+  db.commit()
+  db.close()
+  return result
+
+def get_items_by_category(category):
+  db = psycopg2.connect(database=DBNAME)
+  c = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
+  print category
+  c.execute("SELECT * FROM items WHERE category='%s' ORDER BY create_date DESC LIMIT 10"%(category))
+  result = c.fetchall()
+  db.commit()
+  db.close()
+  return result
+
 def get_item(id):
   db = psycopg2.connect(database=DBNAME)
   c = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
-  c.execute("SELECT * FROM items WHERE id = (%s)",(id))
+  c.execute("SELECT * FROM items WHERE id ='%s'"%(id))
   result = c.fetchone()
   db.commit()
   db.close()

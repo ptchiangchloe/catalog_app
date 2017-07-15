@@ -2,12 +2,21 @@
 
 {% block body %}
   <h1>dashboard<small>welcome {{session.username}}</small></h1>
-  <a href="/add_item" class="btn btn-success">Add Item</a>
+  <h1>Categories</h1>
+  <ul class="list-group">
+    {% for category in categories%}
+    <li class="list-group-item">{{category}}</li>
+    {% endfor %}
+  </ul>
+  <h1>Latest Items</h1>
+  <ul class="list-group">
+    {% for latest_item in latest_items%}
+    <li class="list-group-item">{{latest_item.title}}</li>
+    {% endfor %}
+  </ul>
+  <a href="/catalog/add_item" class="btn btn-success">Add Item</a>
   <hr>
   <table class="table table-striped">
-    <tr>
-
-    </tr>
     <tr>
       <td>ID</td>
       <td>TITLE</td>
@@ -21,8 +30,8 @@
         <td>{{item.title}}</td>
         <td>{{item.category}}</td>
         <td>{{item.create_date}}</td>
-        <td><a href="edit_item/{{item.id}}" class="btn btn-default pull-right">Edit</a></td>
-        <td><a href="delete_item/{{item.id}}" class="btn btn-danger">Delete</a></td>
+        <td><a href="/catalog/edit_item/{{item.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td><a href="/catalog/delete_item/{{item.id}}" class="btn btn-danger">Delete</a></td>
       </tr>
     {% endfor %}
   </table>

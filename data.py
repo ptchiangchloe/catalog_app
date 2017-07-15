@@ -24,3 +24,8 @@ def Articles():
     ]
 
     return articles
+
+def Categories():
+    categories = ['Soccer', 'Basketball', 'Baseball', 'Frisbee', 'Snowboarding',
+    'Rock Climbing', 'Foosball', 'Skating', 'Hockey']
+    return categories
