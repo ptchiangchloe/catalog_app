@@ -1,11 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <h1>dashboard<small>welcome {{session.username}}</small></h1>
   <h1>Categories</h1>
   <ul class="list-group">
     {% for category in categories%}
-    <li class="list-group-item">{{category}}</li>
+    <li class="list-group-item"><a href="/catalog/{{category}}/items">{{category}}</a></li>
     {% endfor %}
   </ul>
   <h1>{{the_category}} items</h1>

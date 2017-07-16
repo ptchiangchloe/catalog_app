@@ -32,7 +32,8 @@ def item(id):
 
 @app.route('/catalog/<string:category>/items')
 def category(category):
-    items_by_category = get_items_by_category(category)
+    lowercase_category = category.lower()
+    items_by_category = get_items_by_category(lowercase_category)
     return render_template('category.html', items=items_by_category, \
     categories=categories,the_category=category)
 
@@ -197,7 +198,7 @@ def catalog_json():
              dic = {}
              dic['title'] = data['title']
              dic['category'] = data['category']
-             dic['description'] = data['description'].replace('<p>', '').replace('</p>', '') 
+             dic['description'] = data['description'].replace('<p>', '').replace('</p>', '')
              Category.append(dic)
          print Category
          return jsonify(Category = Category)

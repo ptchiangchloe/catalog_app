@@ -5,13 +5,13 @@
   <h1>Categories</h1>
   <ul class="list-group">
     {% for category in categories%}
-    <li class="list-group-item">{{category}}</li>
+    <li class="list-group-item"><a href="/catalog/{{category}}/items">{{category}}</a></li>
     {% endfor %}
   </ul>
   <h1>Latest Items</h1>
   <ul class="list-group">
     {% for latest_item in latest_items%}
-    <li class="list-group-item">{{latest_item.title}}</li>
+    <li class="list-group-item"><a href="/catalog/{{latest_item.id}}">{{latest_item.title}}</a>({{latest_item.category}})</li>
     {% endfor %}
   </ul>
   <a href="/catalog/add_item" class="btn btn-success">Add Item</a>
