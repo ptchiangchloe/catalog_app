@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <h1>dashboard<small>welcome {{session.username}}</small></h1>
+  <h1>
+    Dashboard <small>Welcome {{session.username}}!</small></h1>
   <h1>Categories</h1>
   <ul class="list-group">
     {% for category in categories%}
@@ -23,7 +24,9 @@
       <td>CATEGORY</td>
       <td>CREATE DATE</td>
       <td></td>
+      <td></td>
     </tr>
+    <h1>All items</h1>
     {% for item in items %}
       <tr>
         <td>{{ item.id }}</td>

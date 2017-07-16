@@ -10,7 +10,7 @@
   <h1>{{the_category}} items</h1>
   <ul class="list-group">
     {% for item in items%}
-    <li class="list-group-item">{{item.title}}</li>
+    <li class="list-group-item"><a href="/catalog/{{item.id}}">{{item.title}}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}
