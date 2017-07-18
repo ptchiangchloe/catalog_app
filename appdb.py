@@ -10,6 +10,29 @@ def add_user(name, email, username, password):
   db.commit()
   db.close()
 
+def add_gplus_user(login_session):
+    name = login_session['username']
+    email = login_session['email']
+    picture = login_session['picture']
+    db = psycopg2.connect(database=DBNAME)
+    c = db.cursor()
+    c.execute("INSERT INTO gplus_user(name, email, picture) VALUES(%s, %s, %s)",(name, email, picture) )
+    db.commit()
+    db.close()
+    user_id = get_gplus_user_id(login_session['email'])
+    return user_id
+
+def get_gplus_user_id(email):
+    try:
+        db = psycopg2.connect(database=DBNAME)
+        c = db.cursor()
+        c.execute("SELECT * FROM gplus_user WHERE email=(%s)",(email,))
+        user = c.fetchone()
+        db.commit()
+        db.close()
+        return user.id
+    except:
+        return None
 
 def get_user(username, password_candidate):
     db = psycopg2.connect(database=DBNAME)
