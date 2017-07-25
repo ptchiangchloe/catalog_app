@@ -16,9 +16,9 @@ from flask import make_response
 import requests
 
 CLIENT_ID = json.loads(
-    open('client_secrets.json','r').read())['web']['client_id']
+    open('/var/www/catalog_app/client_secrets.json','r').read())['web']['client_id']
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 Articles = Articles()
 categories = Categories()
@@ -123,7 +123,7 @@ def gconnect():
     try:
         # upgrade the authorization code into a credentials object
         print'works'
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets('/var/www/catalog_app/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -316,6 +316,4 @@ def catalog_json():
          return jsonify(Category = Category)
 
 if __name__ == "__main__":
-    app.secret_key = 'secret123'
-    app.debug = True
-    app.run(host = '0.0.0.0', port = 8000)
+    app.run()
