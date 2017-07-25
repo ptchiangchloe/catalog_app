@@ -1,4 +1,4 @@
-# Catalog Project
+# Catalog Web Application Project
 
 This is a project is built to manage a sport related catalog with user authentication from the flask framework. This is a modern MVC type application.
 
@@ -10,13 +10,39 @@ As for the form authentication, I use the WTForms for validation.
 In the production version, I use LAPP(Linux/Apache2/PostgreSQL/Python).
 You can see the live version in http://34.209.92.13/
 
+## URLS:
+
+Home page - root/
+
+Register page - root/register
+
+Login page - root/login
+
+Dashboard page- root/dashboard
+
+Category items page- root/catalog/&lt;category&gt;/items
+
+Single item page with description - root/catalog/&lt;item_id&gt;
+
+Edit item page - root/catalog/edit_item/&lt;item_id&gt;
+
+Delete item page - root/catalog/delete_item/&lt;item_id&gt;
+
+
+
+
+
+
 ## Built With softwares:
 
-* [Python2.7](https://www.python.org/) - The language used
-* [PostgreSQL](https://www.postgresql.org/) - Dependency Management
-* [psycopg2](http://initd.org/psycopg/) - The PostgreSQL adapter for the Python programming language
-* [Git](https://git-scm.com/)- Free and open source distributed version control system.
-* [Github](https://git-scm.com/) - A web-based version control repository
+* [Python2.7](https://www.python.org) - The language used.
+* [Flask](http://flask.pocoo.org) - A Python microframework based on Werkzeug, Jinja 2 and good intentions.
+* [PostgreSQL](https://www.postgresql.org) - Open source object-relational database system.
+* [psycopg2](http://initd.org/psycopg) - The PostgreSQL adapter for the Python programming language.
+* [Git](https://git-scm.com)- Free and open source distributed version control system.
+* [Github](https://git-scm.com) - A web-based version control repository.Lightsail
+* [Lightsail](https://amazonlightsail.com) - Simple Virtual Private Servers on AWS.
+* [Apache2](https://httpd.apache.org) - Most commonly used Web server on Linux systems.
 
 ## Development
 
@@ -247,3 +273,9 @@ CREATE TABLE gplus_user (
 ## Authors
 
 * **Hanyu Jiang** - *Initial work*
+
+## Mentors
+
+* **Steve Wooding** - *Udacity online mentor*
+* **Harry Staley** - *Udacity online mentor*
+* **Greg Berger** - *Udacity online mentor*
