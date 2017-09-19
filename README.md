@@ -1,4 +1,4 @@
-# Catalog Web Application Project
+# Sports Catalog Web Application 
 
 This is a project is built to manage a sport related catalog with user authentication from the flask framework. This is a modern MVC type application.
 
@@ -160,7 +160,9 @@ CREATE TABLE gplus_user (
   sudo ufw enable
   ```
   4. Configure the local timezone to UTC
-  ```sudo dpkg-reconfigure tzdata```
+  ```
+  sudo dpkg-reconfigure tzdata
+  ```
 
 
 ##### Install and secure Apache2 server with its Python mod_wsgi application handler to host the catalog app.
