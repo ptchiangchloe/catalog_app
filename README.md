@@ -1,4 +1,4 @@
-# Sports Catalog Web Application 
+# Sports Catalog Web Application
 
 This is a project is built to manage a sport related catalog with user authentication from the flask framework. This is a modern MVC type application.
 
@@ -303,6 +303,7 @@ CREATE TABLE gplus_user (
   </VirtualHost>
 
   ```
+  `www-data` should change to your own user name and group name, such as `Postgres`.
   5. Enable the virtual host:
 
    ```
