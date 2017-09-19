@@ -8,7 +8,7 @@ framework easily.
 As for the form authentication, I use the WTForms for validation.
 
 In the production version, I use LAPP(Linux/Apache2/PostgreSQL/Python).
-You can see the live version in http://34.209.92.13/
+You can see the live version in http://52.36.14.158/
 
 ## URLS:
 
@@ -56,27 +56,46 @@ Install the Virtual Machine steps:
 2. Download this project folder and place it in the virtual machine folder.
 
 3. Run your local server in the vagrant folder
-    ```vagrant up```
+    ```
+    vagrant up
+    ```
 
-4. Log into your local server ```vagrant ssh```
+4. Log into your local server
+```
+vagrant ssh
+```
 
 5. Once you get into the local server
-```cd /vagrant```
+```
+cd /vagrant
+```
 
-6. In the catalog project folder, ```sudo pip install wtforms```
-7. Run ```python app.py```
+6. In the catalog project folder,
+```
+sudo pip install wtforms
+```
+7. Run
+```
+python app.py
+```
 
 ### Install PostgreSQL
 
 in your local server(vagrant/virtualBox has intalled PostgreSQL.)
 
-
-
 ### Create Database
 Connect psql command
 
-1. Run ```CREATE DATABASE myflaskapp```
-2. ``` \connect myflaskapp```
+1. Run
+```
+CREATE DATABASE myflaskapp
+```
+
+2.
+
+```
+\connect myflaskapp
+```
    Create database tables in myflaskapp database(You need to use psql to connect the database.):
 
 Create users table:
@@ -125,7 +144,12 @@ CREATE TABLE gplus_user (
   sudo apt-get update
   sudo apt-get upgrade
   ```
-  2.  ```sudo nano /etc/ssh/sshd_config``` and then change ```Port 22``` to ```Port 2200``` , then save & quit.
+  2.  
+
+  ```
+  sudo nano /etc/ssh/sshd_config
+  ```
+  and then change ```Port 22``` to ```Port 2200``` , then save & quit.
 
   3. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
 
@@ -141,24 +165,40 @@ CREATE TABLE gplus_user (
 
 ##### Install and secure Apache2 server with its Python mod_wsgi application handler to host the catalog app.
 
-  1. Install Apache ```sudo apt-get install apache2```
-  2. Install mod_wsgi ```sudo apt-get install python-setuptools libapache2-mod-wsgi```
-  3. Restart Apache ```sudo service apache2 restart```
-
-
+  1. Install Apache
+  ```
+  sudo apt-get install apache2
+  ```
+  2. Install mod_wsgi
+  ```
+  sudo apt-get install python-setuptools libapache2-mod-wsgi
+  ```
+  3. Restart Apache
+  ```
+  sudo service apache2 restart
+  ```
 ##### Install and secure the PostgreSQL, create myflaskapp database to store application information in a scalable way.
 
-  1. Install PostgreSQL ```sudo apt-get install postgresql```
+  1. Install PostgreSQL
+  ```
+  sudo apt-get install postgresql
+  ```
   2. Make sure there is no remote connection allowed
 
-  ```sudo nano /etc/postgresql/9.5/main/pg_hba.conf```
+  ```
+  sudo nano /etc/postgresql/9.5/main/pg_hba.conf
+  ```
 
   3. Login in as user 'postgres'
 
-    ```sudo su - postgres```
+    ```
+    sudo su - postgres
+    ```
   4. Get into postgreSQL shell
 
-  ```psql```
+  ```
+  psql
+  ```
 
   5. Create a new database named catalog and create a new user named catalog in postgreSQL shell
 
@@ -170,10 +210,14 @@ CREATE TABLE gplus_user (
 
   6. Give new user 'catalog' limited permissions to catalog application database.
 
-  ```ALTER ROLE catalog WITH Create DB;```
+  ```
+  ALTER ROLE catalog WITH Create DB;
+  ```
 
   7. Quit postgreSQL
-  ```postgres=# \q```
+  ```
+  postgres=# \q
+  ```
 
   8. Exit from user "postgres"
 
@@ -182,35 +226,57 @@ CREATE TABLE gplus_user (
 ##### Deploy and secure the catalog app in the Linux server.
 
   1. Install Git
-  ```sudo apt-get install git```
+  ```
+  sudo apt-get install git
+  ```
 
   2. clone 'catalog_app' to '/var/www/' directory from the master branch from Github repository.
 
-  ```git clone https://github.com/ptchiangchloe/catalog_app.git```
+  ```
+  git clone https://github.com/ptchiangchloe/catalog_app.git
+  ```
 
   3. Install following packages in order to run the app:
 
   ```(Since flask is a very light weight framework, so you need to install a lot of library manually)```
 
-  ```sudo apt-get install python-pip```
+  ```
+  sudo apt-get install python-pip
+  ```
 
-  ```sudo pip install flask```
+  ```
+  sudo pip install flask
+  ```
 
-  ```sudo pip install wtforms```
+  ```
+  sudo pip install wtforms
+  ```
 
-  ```sudo pip install passlib```
+  ```
+  sudo pip install passlib
+  ```
 
-  ```sudo pip install psycopg2```
+  ```
+  sudo pip install psycopg2
+  ```
 
-  ```sudo pip install bleach```
+  ```
+  sudo pip install bleach
+  ```
 
-  ```sudo pip install oauth2client```
+  ```
+  sudo pip install oauth2client
+  ```
 
-  ```sudo pip install requests```
+  ```
+  sudo pip install requests
+  ```
 
   4. Configure Python mod_wsgi application handler:
 
-  ```sudo nano /etc/apache2/sites-enabled/000-default.conf```
+  ```
+  sudo nano /etc/apache2/sites-enabled/000-default.conf
+  ```
 
   ```
     <VirtualHost *:80>
@@ -237,7 +303,9 @@ CREATE TABLE gplus_user (
   ```
   5. Enable the virtual host:
 
-   ```sudo a2ensite catalog_app```
+   ```
+   sudo a2ensite catalog_app
+   ```
 
   6. Create the catalog.wsgi file in catalog_app directory :
 
@@ -254,6 +322,9 @@ CREATE TABLE gplus_user (
   ```
 
   7. Restart the Apache2 server
+  ```
+  sudo /etc/init.d/apache2 restart
+  ```
 
 ## Third-party resources
 [Install Apache and PostgreSQL for web server application](https://classroom.udacity.com/nanodegrees/nd004/parts/ab002e9a-b26c-43a4-8460-dc4c4b11c379/modules/357367901175461/lessons/4340119836/concepts/48159388430923
