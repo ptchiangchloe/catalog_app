@@ -17,6 +17,7 @@ import requests
 
 CLIENT_ID = json.loads(
     open('client_secrets.json','r').read())['web']['client_id']
+    # use '/var/www/catalog_app/client_secrets.json' for apache server.
 
 app = Flask(__name__)
 

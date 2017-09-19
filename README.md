@@ -29,10 +29,6 @@ Edit item page - root/catalog/edit_item/&lt;item_id&gt;
 Delete item page - root/catalog/delete_item/&lt;item_id&gt;
 
 
-
-
-
-
 ## Built With softwares:
 
 * [Python2.7](https://www.python.org) - The language used.
@@ -80,7 +76,8 @@ in your local server(vagrant/virtualBox has intalled PostgreSQL.)
 Connect psql command
 
 1. Run ```CREATE DATABASE myflaskapp```
-2. Create database tables in myflaskapp database(You need to use psql to connect the database. ):
+2. ``` \connect myflaskapp```
+   Create database tables in myflaskapp database(You need to use psql to connect the database.):
 
 Create users table:
 ```
@@ -128,7 +125,7 @@ CREATE TABLE gplus_user (
   sudo apt-get update
   sudo apt-get upgrade
   ```
-  2. Use ```sudo nano /etc/ssh/sshd_config``` and then change Port 22 to Port 2200 , save & quit.
+  2.  ```sudo nano /etc/ssh/sshd_config``` and then change ```Port 22``` to ```Port 2200``` , then save & quit.
 
   3. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
 
@@ -192,6 +189,8 @@ CREATE TABLE gplus_user (
   ```git clone https://github.com/ptchiangchloe/catalog_app.git```
 
   3. Install following packages in order to run the app:
+
+  ```(Since flask is a very light weight framework, so you need to install a lot of library manually)```
 
   ```sudo apt-get install python-pip```
 
